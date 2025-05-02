@@ -1,0 +1,56 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "AuthFlow is the production level authentication & authorization project.",
+  "keywords": [
+    "Login",
+    "Signup",
+    "Authentication",
+    "Authorization",
+    "MERN",
+    "PostgreSQL",
+    "Prisma",
+    "JavaScript",
+    "TypeScript",
+    "Zod",
+    "Redis",
+    "React",
+    "Node",
+    "Express"
+  ],
+  "license": "ISC",
+  "author": "Harshit Kumar",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "npx tsc"
+  },
+  "dependencies": {
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/hpp": "^0.2.6",
+    "@types/morgan": "^1.9.9",
+    "@types/winston": "^2.4.4",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

@@ -57,7 +57,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Server startup
-app.listen(port, () => {
+app.listen({ port, host: "0.0.0.0", reusePort: true }, () => {
   logger.info(`Server started on port ${port} in ${environment} mode`);
 });
 

@@ -1,37 +1,49 @@
 {
-  "name": "backend",
+  "name": "authflow-backend",
   "version": "1.0.0",
-  "description": "AuthFlow is the production level authentication & authorization project.",
+  "description": "AuthFlow is the production-level authentication & authorization project.",
   "keywords": [
-    "Login",
-    "Signup",
-    "Authentication",
-    "Authorization",
-    "MERN",
-    "PostgreSQL",
-    "Prisma",
-    "JavaScript",
-    "TypeScript",
-    "Zod",
-    "Redis",
-    "React",
-    "Node",
-    "Express"
+    "login",
+    "signup",
+    "authentication",
+    "authorization",
+    "mern",
+    "postgresql",
+    "prisma",
+    "javascript",
+    "typescript",
+    "zod",
+    "redis",
+    "react",
+    "node",
+    "express"
   ],
   "license": "ISC",
   "author": "Harshit Kumar",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "nodemon dist/index.js",
-    "dev": "nodemon src/index.ts",
-    "build": "npx tsc"
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon --watch src -e ts,json --exec \"ts-node src/index.ts\"",
+    "build": "npx tsc",
+    "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",
+    "prisma:migrate:dev": "dotenv -e .env.dev -- npx prisma migrate dev --schema=./prisma/schema.prisma",
+    "prisma:migrate:prod": "dotenv -e .env -- npx prisma migrate deploy --schema=./prisma/schema.prisma",
+    "prisma:studio": "npx prisma studio --schema=./prisma/schema.prisma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harshitclub/AuthFlow.git"
   },
   "dependencies": {
+    "@prisma/client": "^6.7.0",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.5.0",
+    "dotenv-cli": "^8.0.0",
+    "dotenv-flow": "^4.1.0",
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.1.0",
@@ -50,7 +62,11 @@
     "@types/morgan": "^1.9.9",
     "@types/winston": "^2.4.4",
     "nodemon": "^3.1.10",
+    "prisma": "^6.7.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id                  String    @id @default(uuid())
+  email               String    @unique
+  username            String    @unique
+  firstName           String
+  lastName            String
+  phone               String?
+  password            String
+  role                Role      @default(USER)
+  isActive            Boolean   @default(true)
+  isVerified          Boolean   @default(false)
+  verificationToken   String?
+  forgetPasswordToken String?
+  lastLogin           DateTime?
+  userAgent           String[]
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  address             Json?
+  socialLinks         Json?
+
+  // Fields for Google and GitHub OAuth
+  googleId String? @unique
+  githubId String? @unique
+}

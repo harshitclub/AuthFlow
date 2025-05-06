@@ -26,10 +26,12 @@
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "dev": "cross-env NODE_ENV=development nodemon --watch src -e ts,json --exec \"ts-node src/index.ts\"",
     "build": "npx tsc",
-    "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",
-    "prisma:migrate:dev": "dotenv -e .env.dev -- npx prisma migrate dev --schema=./prisma/schema.prisma",
-    "prisma:migrate:prod": "dotenv -e .env -- npx prisma migrate deploy --schema=./prisma/schema.prisma",
-    "prisma:studio": "npx prisma studio --schema=./prisma/schema.prisma"
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate:dev": "dotenv -e .env.dev -- npx prisma migrate dev",
+    "prisma:migrate:prod": "dotenv -e .env -- npx prisma migrate deploy",
+    "prisma:studio": "npx prisma studio",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier . --fix"
   },
   "repository": {
     "type": "git",
@@ -55,16 +57,23 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.26.0",
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/hpp": "^0.2.6",
     "@types/morgan": "^1.9.9",
     "@types/winston": "^2.4.4",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.4.0",
+    "globals": "^16.0.0",
     "nodemon": "^3.1.10",
+    "prettier": "3.5.3",
     "prisma": "^6.7.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.0"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { logger } from "../utils/logger";
 import { getApplicationHealth, getSystemHealth } from "../utils/resources";
 
@@ -7,15 +7,9 @@ const environment = process.env.NODE_ENV;
 /**
  * Self-check endpoint - Checks the basic functionality of the API.
  */
-export const self = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<any> => {
+export const self = async (req: Request, res: Response): Promise<any> => {
   try {
-    return res
-      .status(200)
-      .json({ message: "Backend is healthy!", success: true });
+    return res.status(200).json({ message: "Backend is healthy!", success: true });
   } catch (error: any) {
     logger.error(`Self route error: ${error.message}`);
     return res.status(500).json({
@@ -29,11 +23,7 @@ export const self = async (
 /**
  * Health check endpoint - Provides details about the application and system health.
  */
-export const health = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<any> => {
+export const health = async (req: Request, res: Response): Promise<any> => {
   try {
     const [applicationHealth, systemHealth] = await Promise.all([
       getApplicationHealth(),

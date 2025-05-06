@@ -1,0 +1,9 @@
+# Ignore the entire build directory
+dist
+
+# Ignore specific files
+package-lock.json
+yarn.lock
+
+# Ignore all .test.js files in the tests directory
+tests/**/*.test.js

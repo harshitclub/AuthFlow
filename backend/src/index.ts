@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import globalRouter from "./routes/globalRouter";
 import helmet from "helmet";
@@ -45,12 +45,12 @@ app.use(hpp()); // Protects against HTTP Parameter Pollution attacks
 app.use("/api/v1", globalRouter);
 
 // Error Handling Middleware (Should be after routes)
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response) => {
   res.status(404).json({ message: "Resource not found" });
   logger.warn(`Route not found: ${req.method} ${req.originalUrl}`);
 });
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, req: Request, res: Response) => {
   console.error(err.stack); // Keep console.error for immediate debugging of critical errors
   logger.error(`Unhandled error: ${err.message}`, err);
   res.status(500).json({ message: "Something went wrong" });

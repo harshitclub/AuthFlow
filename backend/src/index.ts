@@ -8,6 +8,7 @@ import rateLimit from "express-rate-limit";
 import compression from "compression";
 import hpp from "hpp";
 import { logger, loggerStream } from "./utils/logger";
+import { AppError } from "./utils/Errors/AppError";
 
 dotenv.config();
 
@@ -50,10 +51,23 @@ app.use((req: Request, res: Response) => {
   logger.warn(`Route not found: ${req.method} ${req.originalUrl}`);
 });
 
-app.use((err: any, req: Request, res: Response) => {
+app.use((err: AppError, req: Request, res: Response) => {
   console.error(err.stack); // Keep console.error for immediate debugging of critical errors
   logger.error(`Unhandled error: ${err.message}`, err);
-  res.status(500).json({ message: "Something went wrong" });
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Something went wrong";
+  const errorCode = err.errorCode;
+  const details = err.details;
+
+  const errorResponse: { message: string; errorCode?: string; details?: string } = { message };
+  if (errorCode) {
+    errorResponse.errorCode = errorCode;
+  }
+  if (details) {
+    errorResponse.details = details;
+  }
+
+  res.status(statusCode).json(errorResponse);
 });
 
 // Server startup
